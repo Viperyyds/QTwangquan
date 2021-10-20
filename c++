@@ -1,2 +1,0 @@
-# QTwangquan
-QT代码
