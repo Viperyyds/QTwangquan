@@ -31,9 +31,16 @@ Widget::Widget(QWidget *parent)
     connect(ui->pushButton_cheng ,&QPushButton::clicked,this,[=](){ btn_logic(0,"*");});
     connect(ui->pushButton_chu ,&QPushButton::clicked,this,[=](){ btn_logic(0,"/");});
     connect(ui->pushButton_deng ,&QPushButton::clicked,this,[=](){ btn_logic(0,"=");});
-    connect(ui->pushButton_11 ,&QPushButton::clicked,this,[=](){ btn_logic(0,"[]");});
+    connect(ui->pushButton_11 ,&QPushButton::clicked,this,[=](){ btn_logic(0,"%");});
     connect(ui->pushButton_12,&QPushButton::clicked,this,[=](){btn_logic(0,"ping");});
-    connect(ui->pushButton_13,&QPushButton::clicked,this,[=](){btn_logic(0,"ycifang");});
+    connect(ui->pushButton_13,&QPushButton::clicked,this,[=](){btn_logic(0,"y");});
+    connect(ui->pushButton_14,&QPushButton::clicked,this,[=](){btn_logic(0,"kaifang");});
+    connect(ui->pushButton_15,&QPushButton::clicked,this,[=](){btn_logic(0,"LN");});
+    connect(ui->pushButton_16,&QPushButton::clicked,this,[=](){btn_logic(0,"e");});
+    connect(ui->pushButton_17,&QPushButton::clicked,this,[=](){btn_logic(0,"huashi");});
+    connect(ui->pushButton_18,&QPushButton::clicked,this,[=](){btn_logic(0,"date");});
+
+
 
     connect(ui->pushButton_10,&QPushButton::clicked,this,[=]()
     {   a.clear();
@@ -67,15 +74,25 @@ Widget::Widget(QWidget *parent)
  {
      if(i==" ")
      {
-         a += QString::number(x);//这里的加法是字符串的叠加，不是直接进行代数运算
+
+        a += QString::number(x);//这里的加法是字符串的叠加，不是直接进行代数运算
+
      }
      else if(x == 0)
      {
          if(i != "=")
        {
-         b.insert(0,a);//如果在这里输入了一个运算符，那么要将a的值插入到数组b[0]里面
-         a.clear();
-         b.insert(1,i);//将运算符插入到数组b[1]里面
+             if (i != "date")
+             {
+                 b.insert(0,a);//如果在这里输入了一个运算符，那么要将a的值插入到数组b[0]里面
+                 a.clear();
+                 b.insert(1,i);//将运算符插入到数组b[1]里面
+             }
+             else if(i == "date")
+             {
+                 d.insert(0,a);
+                 a.clear();
+             }
        }
          else if(i != "ping")
          {
@@ -84,7 +101,7 @@ Widget::Widget(QWidget *parent)
             den_logic();//这里这个函数就是最后的运算函数
 
          }
-         else if(i == "ping")
+         else if(i == "ping" || i == "kaifang" || i == "LN" || i == "e" || i == "huashi")
          {
             den_logic();
          }
@@ -99,35 +116,57 @@ Widget::Widget(QWidget *parent)
      a.clear();
      if(b.at(1) == "+")
      {
-        a += QString::number(QString(b.at(0)).toInt()+QString(b.at(2)).toInt());
+        a += QString::number(QString(b.at(0)).toDouble()+QString(b.at(2)).toDouble());
      }
      else if(b.at(1) == "-")
      {
-        a += QString::number(QString(b.at(0)).toInt()-QString(b.at(2)).toInt());
+        a += QString::number(QString(b.at(0)).toDouble()-QString(b.at(2)).toDouble());
      }
      else if(b.at(1) == "*")
      {
-        a += QString::number(QString(b.at(0)).toInt()*QString(b.at(2)).toInt());
+        a += QString::number(QString(b.at(0)).toDouble()*QString(b.at(2)).toDouble());
      }
      else if(b.at(1) == "/")
      {
-        a += QString::number(QString(b.at(0)).toInt()/QString(b.at(2)).toInt());
+        if(b.at(2) != "0")
+        {
+            a += QString::number(QString(b.at(0)).toDouble()/QString(b.at(2)).toDouble());
+        }
+        else
+        {
+           a = "想什么啊" ;
+        }
      }
-     else if(b.at(1) == "[]")
+     else if(b.at(1) == "%")
      {
          a +=  QString::number(QString(b.at(0)).toInt()%QString(b.at(2)).toInt());
 
      }
      else if(b.at(1) == "ping")
      {
-         a +=  QString::number(QString(b.at(0)).toInt()*QString(b.at(0)).toInt());
+         a +=  QString::number(QString(b.at(0)).toDouble()*QString(b.at(0)).toDouble());
 
      }
-     else if(b.at(1) == "ycifang")
+     else if(b.at(1) == "y")
      {
          a += QString::number(pow(QString(b.at(0)).toInt(),QString(b.at(2)).toInt()));
      }
-
+     else if(b.at(1) == "kaifang")
+     {
+         a += QString::number(sqrt(QString(b.at(0)).toDouble()));
+     }
+     else if(b.at(1) == "LN")
+     {
+         a += QString::number(qLn(QString(b.at(0)).toDouble()));
+     }
+     else if(b.at(1) == "e")
+     {
+         a += QString::number(qExp(QString(b.at(0)).toDouble()));
+     }
+     else if(b.at(1) == "huashi")
+     {
+         a += QString::number(QString(b.at(0)).toDouble()*9/5+32);
+     }
 
 
      ui->lineEdit->setText(a);
@@ -146,6 +185,14 @@ Widget::~Widget()
 {
     delete ui;
 }
+
+
+
+
+
+
+
+
 
 
 

@@ -23,14 +23,17 @@ public:
 
 public:
     QString a;//a用来储存LineEdit里面的内容
+    QString a1;//
     QStringList b;//b用来存储点击过的运算符
+    QStringList d;//d用来存储日期计算需要的值
 private:
     QLCDNumber *lcd;
     QTimer *timer;
 
 public slots:
      void onTimerOut();
-  private:
+
+private:
     Ui::Widget *ui;
 };
 #endif // WIDGET_H
