@@ -2,6 +2,7 @@
 #define MYWIDGET_H
 
 #include <QWidget>
+#include "tuxinxianshi.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MyWidget; }
@@ -16,7 +17,7 @@ public:
     ~MyWidget();
 public:
     void btn_logic(int x,QString i=" ");
-    //void show();
+    void in();
 public:
     QString a;
     QStringList b;
@@ -33,7 +34,12 @@ private slots:
 
     void on_pushButton_20_clicked();
 
+    void on_pushButton_23_clicked();
+
+    void on_pushButton_24_clicked();
+
 private:
     Ui::MyWidget *ui;
+
 };
 #endif // MYWIDGET_H

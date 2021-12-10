@@ -6,6 +6,15 @@
 #include <QTime>
 #include <QtMath>
 #include <QtCore/qmath.h>
+int r=0;
+float g ;
+float h;
+float j;
+float k;
+float p;
+float o;
+
+
 
 MyWidget::MyWidget(QWidget *parent)
     : QWidget(parent)
@@ -67,31 +76,37 @@ void MyWidget::btn_logic(int x,QString i) {
        if(i == "x1")
        {
            b.insert(0,a);
+           g = QString(b.at(0)).toFloat();
            a.clear();
        }
        else if(i == "y1")
        {
            b.insert(1,a);
+           h= QString(b.at(1)).toFloat();
            a.clear();
        }
        else if(i == "z1")
        {
            b.insert(2,a);
+           j= QString(b.at(2)).toFloat();
            a.clear();
        }
        else if(i == "x2")
        {
            d.insert(0,a);
+           k= QString(d.at(0)).toFloat();
            a.clear();
        }
        else if(i == "y2")
        {
            d.insert(1,a);
+           p= QString(d.at(1)).toFloat();
            a.clear();
        }
        else if(i == "z2")
        {
            d.insert(2,a);
+           o= QString(d.at(2)).toFloat();
            a.clear();
        }
        else if(i == "Line")
@@ -186,5 +201,19 @@ void MyWidget::on_pushButton_20_clicked()
     ui->lineEdit->setText(x1);
     ui->lineEdit_4->setText(y1);
     ui->lineEdit_5->setText(z1);
+}
+
+
+
+void MyWidget::on_pushButton_23_clicked()
+{
+   Widget *position = new Widget;
+   position->show();
+}
+
+
+void MyWidget::on_pushButton_24_clicked()
+{
+    r=0;
 }
 
