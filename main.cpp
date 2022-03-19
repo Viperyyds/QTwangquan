@@ -1,15 +1,11 @@
-#include "serverwidget.h"
+#include "udpwidget.h"
 
 #include <QApplication>
-#include "clientwidget.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    ServerWidget w;
-    ClientWidget w2;
-
+    UdpWidget w;
     w.show();
-    w2.show();
     return a.exec();
 }
