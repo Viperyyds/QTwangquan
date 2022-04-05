@@ -1,29 +1,21 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
-#include <QOpenGLWidget>
-#include <QOpenGLExtraFunctions>
-#include <QOpenGLShaderProgram>
-#include <QOpenGLVertexArrayObject>
-#include <QOpenGLBuffer>
+#include <QWidget>
 
-class Widget : public QOpenGLWidget , protected QOpenGLExtraFunctions
+QT_BEGIN_NAMESPACE
+namespace Ui { class Widget; }
+QT_END_NAMESPACE
+
+class Widget : public QWidget
 {
     Q_OBJECT
 
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
-protected:
-    virtual void initializeGL() override;
-    virtual void paintGL() override;
-    virtual void resizeGL(int w, int h) override;
-private:
-    QOpenGLShaderProgram shaderprogram;
-    QOpenGLVertexArrayObject VAO;
-    QOpenGLBuffer VBO;
-public:
-    float b[1]={0.5};
 
+private:
+    Ui::Widget *ui;
 };
 #endif // WIDGET_H
